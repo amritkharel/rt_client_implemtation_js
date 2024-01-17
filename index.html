@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket.IO Client</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="client.js"></script>
+</head>
+<body>
+    <h2>Socket.IO Test</h2>
+    <form id="xyForm">
+        <label for="xValue">X Value:</label>
+        <input type="number" id="xValue" name="xValue"><br><br>
+        <label for="yValue">Y Value:</label>
+        <input type="number" id="yValue" name="yValue"><br><br>
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        // Ensure the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('xyForm');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Capture X and Y values
+                const xValue = document.getElementById('xValue').value;
+                const yValue = document.getElementById('yValue').value;
+
+                // Emit the values to the server
+                socket.emit('from_client_a_to_c', { X: parseFloat(xValue), Y: parseFloat(yValue) });
+            });
+        });
+    </script>
+</body>
+</html>
